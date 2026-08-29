@@ -1,6 +1,6 @@
 # homebrew-tap
 
-Tap Homebrew untuk [Zerofuss](https://zerofuss.app/) - live view goggles DJI di
+Tap Homebrew untuk [Zerofuss](https://zerofuss.margingroup.id/) - live view goggles DJI di
 jendela desktop lewat kabel USB.
 
 ```sh

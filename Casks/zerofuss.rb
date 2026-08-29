@@ -45,7 +45,7 @@ cask "zerofuss" do
 
   name "Zerofuss"
   desc "Live view DJI Goggles di jendela desktop lewat kabel USB-C"
-  homepage "https://zerofuss.app/"
+  homepage "https://zerofuss.margingroup.id/"
 
   # Big Sur adalah macOS pertama untuk Apple Silicon; di bawah itu build arm64
   # tidak ada gunanya dan WKWebView-nya sudah terlalu tua.
