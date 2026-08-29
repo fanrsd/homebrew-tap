@@ -4,12 +4,15 @@ Tap Homebrew untuk [Zerofuss](https://zerofuss.margingroup.id/) - live view gogg
 jendela desktop lewat kabel USB.
 
 ```sh
-brew install --cask --no-quarantine fanrsd/tap/zerofuss
+brew install --cask fanrsd/tap/zerofuss
+xattr -dr com.apple.quarantine /Applications/Zerofuss.app
 ```
 
-`--no-quarantine` diperlukan karena build-nya belum ditandatangani Apple.
-Tanpa flag itu aplikasinya terpasang tapi Gatekeeper menolaknya dengan
-"aplikasi rusak" - yang kurang tanda tangannya, bukan berkasnya.
+Baris `xattr` itu diperlukan karena build-nya belum ditandatangani Apple:
+tanpa itu Gatekeeper menolak aplikasinya dengan "aplikasi rusak" - yang kurang
+tanda tangannya, bukan berkasnya. Flag `--no-quarantine` yang dulu mengurusnya
+sudah dibuang Homebrew di 4.7, jadi memakainya hanya menghasilkan
+`invalid option`. Cask ini mencetak perintah penggantinya sesudah memasang.
 
 Cask di sini DIBANGKITKAN: ia disalin dari repo sumber Zerofuss oleh
 `rilis-mac.sh` setiap rilis, lengkap dengan versi dan sha256 yang sudah terisi.

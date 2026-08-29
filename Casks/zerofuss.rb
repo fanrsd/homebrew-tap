@@ -12,14 +12,21 @@
 # dimatikan Gatekeeper di mesin pemakai. Selama Zerofuss belum punya Developer
 # ID, tap sendiri adalah satu-satunya jalur yang jujur.
 #
-# UNTUK BUILD TANPA TANDA TANGAN, pemakai harus melewati karantina:
+# SESUDAH memasang, aplikasinya masih terkarantina Gatekeeper karena build ini
+# belum ditandatangani Apple. Satu perintah, sekali per salinan:
 #
-#   brew install --cask --no-quarantine fanrsd/tap/zerofuss
+#   xattr -dr com.apple.quarantine /Applications/Zerofuss.app
 #
-# Tanpa `--no-quarantine`, aplikasinya terpasang tapi Gatekeeper menolaknya
-# dengan "aplikasi rusak" - pesan yang menuduh berkasnya, padahal yang kurang
-# cuma tanda tangan. Begitu ada Developer ID dan notarisasi, flag itu tidak
-# diperlukan lagi dan baris ini harus dihapus.
+# Flag `--no-quarantine` yang dulu mengurus ini SUDAH TIDAK ADA: Homebrew
+# membuangnya di 4.7 (Homebrew/brew#20755) dan 5.0 mendeprekasi seluruh
+# mekanisme bypass-nya. Memakainya sekarang hanya menghasilkan
+# "invalid option: --no-quarantine". Blok `caveats` di bawah mencetak perintah
+# penggantinya begitu pemasangan selesai, jadi pemakai tidak perlu mencarinya.
+#
+# Arah akhirnya jelas dan bukan pilihan kita: Homebrew mewajibkan seluruh cask
+# lolos Gatekeeper per September 2026. Begitu ada Developer ID Apple dan
+# notarisasi, blok caveats itu dihapus dan pemasangannya jadi satu baris tanpa
+# ekor.
 #
 # Dua berkas, bukan satu universal: unduhan per-arsitektur separuh ukuran, dan
 # blok on_arm/on_intel di bawah ini justru dibuat untuk memilihnya sendiri.
@@ -61,4 +68,19 @@ cask "zerofuss" do
     "~/Library/Caches/id.zerofuss.desktop",
     "~/Library/Saved Application State/id.zerofuss.desktop.savedState",
   ]
+
+  # Dicetak brew sendiri sesudah pemasangan. Sengaja TIDAK dikerjakan lewat
+  # `postflight`: mencabut Gatekeeper diam-diam untuk pemakai adalah hal yang
+  # tidak boleh dilakukan tanpa dia tahu - dan itu justru yang membuat Homebrew
+  # membuang `--no-quarantine`. Perintahnya ditunjukkan, pemakainya yang
+  # memutuskan.
+  caveats <<~EOS
+    Build ini belum ditandatangani Apple, jadi Gatekeeper masih menahannya.
+    Sekali per salinan aplikasi:
+
+      xattr -dr com.apple.quarantine /Applications/Zerofuss.app
+
+    Yang kurang tanda tangannya, bukan berkasnya. Flag --no-quarantine sudah
+    dibuang Homebrew 4.7, jadi jalur inilah penggantinya.
+  EOS
 end
