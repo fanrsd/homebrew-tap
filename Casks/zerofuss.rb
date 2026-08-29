@@ -39,13 +39,13 @@ cask "zerofuss" do
   version "0.1.0"
 
   on_arm do
-    sha256 :no_check
+    sha256 "722441df4761db7520efe6652453b22d59e586a8cb066b96a253d1c1bcf7a597"
     url "https://github.com/fanrsd/zerofuss-releases/releases/download/v#{version}/Zerofuss_#{version}_aarch64.dmg",
         verified: "github.com/fanrsd/zerofuss-releases/"
   end
 
   on_intel do
-    sha256 :no_check
+    sha256 "4b27acc24acaa7e8556e7f98a9aa4bece3fd96c6ea87ae4dc436108ae46a313d"
     url "https://github.com/fanrsd/zerofuss-releases/releases/download/v#{version}/Zerofuss_#{version}_x64.dmg",
         verified: "github.com/fanrsd/zerofuss-releases/"
   end
